@@ -6,9 +6,11 @@ function startTimer() {
   if (timerInterval) return;
   timerInterval = setInterval(() => {
     timerValue++;
-    document.getElementById("timer").value = timerValue;
+    document.getElementById("timer").value = formatTime(timerValue);
   }, 1000);
 }
+
+
 
 function stopTimer() {
   clearInterval(timerInterval);
@@ -20,17 +22,29 @@ function increment(id) {
   input.value = parseInt(input.value) + 1;
 }
 
-function resetField(id) {
-  document.getElementById(id).value = 0;
-  if (id === "timer") {
-    timerValue = 0;
-    stopTimer();
+function decrement(id) {
+  const input = document.getElementById(id);
+  const current = parseInt(input.value);
+  if (current > 0) {
+    input.value = current - 1;
   }
 }
 
+
+function resetField(id) {
+  if (id === "timer") {
+    timerValue = 0;
+    stopTimer();
+    document.getElementById(id).value = formatTime(timerValue);
+  } else {
+    document.getElementById(id).value = 0;
+  }
+}
+
+
 function saveData() {
   const data = {
-    timer: document.getElementById("timer").value,
+    timer: formatTime(timerValue),
     touch: document.getElementById("touch").value,
     longPass: document.getElementById("longPass").value,
     shortPass: document.getElementById("shortPass").value,
@@ -46,6 +60,12 @@ function saveData() {
   renderTable(entries);
   saveToLocalStorage();
   alert("Tallennettu!");
+}
+
+function formatTime(seconds) {
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  return `${mins}:${secs.toString().padStart(2, '0')}`;
 }
 
 function renderTable(data) {
@@ -188,3 +208,15 @@ window.onload = function() {
   }
   
 }
+
+function resetAllCounts() {
+  ["touch", "shortPass", "longPass", "sprint", "feedbackDuring", "feedbackAfter"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = "0";
+  });
+
+  document.getElementById("timer").value = formatTime(0);
+  timerValue = 0;
+  stopTimer();
+}
+

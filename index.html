@@ -2,15 +2,18 @@
 <html lang="fi">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Harjoittelun seuranta</title>
   <link rel="stylesheet" href="style.css">
+</head>
+
 </head>
 <body>
   <div class="container">
     <h1>Harjoittelun seuranta</h1>
 
     <div class="row">
-      <label>⏱ Aktiivinen aika (s):</label>
+      <label>⏱ Aktiivinen aika:</label>
       <button class="green" onclick="startTimer()">Start</button>
       <input type="text" id="timer" readonly value="0">
       <button onclick="stopTimer()">Stop</button>
@@ -20,6 +23,7 @@
     <div class="row">
       <label>Kosketukset:</label>
       <button class="green" onclick="increment('touch')">+</button>
+      <button onclick="decrement('touch')">-</button>
       <input type="text" id="touch" readonly value="0">
       <button onclick="resetField('touch')">⟲</button>
     </div>
@@ -27,6 +31,7 @@
     <div class="row">
       <label>Lyhyet syötöt:</label>
       <button class="green" onclick="increment('shortPass')">+</button>
+      <button onclick="decrement('shortPass')">-</button>
       <input type="text" id="shortPass" readonly value="0">
       <button onclick="resetField('shortPass')">⟲</button>
     </div>
@@ -34,6 +39,7 @@
     <div class="row">
       <label>Pitkät syötöt:</label>
       <button class="green" onclick="increment('longPass')">+</button>
+      <button onclick="decrement('longPass')">-</button>
       <input type="text" id="longPass" readonly value="0">
       <button onclick="resetField('longPass')">⟲</button>
     </div>
@@ -41,6 +47,7 @@
     <div class="row">
       <label>Terävät spurtit:</label>
       <button class="green" onclick="increment('sprint')">+</button>
+      <button onclick="decrement('sprint')">-</button>
       <input type="text" id="sprint" readonly value="0">
       <button onclick="resetField('sprint')">⟲</button>
     </div>
@@ -48,6 +55,7 @@
     <div class="row">
       <label>Palaute (treenin aikana):</label>
       <button class="green" onclick="increment('feedbackDuring')">+</button>
+      <button onclick="decrement('feedbackDuring')">-</button>
       <input type="text" id="feedbackDuring" readonly value="0">
       <button onclick="resetField('feedbackDuring')">⟲</button>
     </div>
@@ -55,14 +63,20 @@
     <div class="row">
       <label>Palaute (treenin jälkeen):</label>
       <button class="green" onclick="increment('feedbackAfter')">+</button>
+      <button onclick="decrement('feedbackAfter')">-</button>
       <input type="text" id="feedbackAfter" readonly value="0">
       <button onclick="resetField('feedbackAfter')">⟲</button>
     </div>
 
+    <div class="row">
+      <label></label>
+      <button onclick="resetAllCounts()">⟲ Nollaa</button>
+    </div>
+    
     <label>Pelaaja:</label>
-    <input type="text" id="player">
+    <input type="text" id="player" class="input">
     <label>Joukkue:</label>
-    <input type="text" id="team">
+    <input type="text" id="team" class="input">
     <div style="margin-top: 20px;"></div>
 
     <button class="green" onclick="saveData()">💾 Tallenna</button>
